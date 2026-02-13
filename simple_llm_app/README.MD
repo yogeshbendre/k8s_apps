@@ -17,15 +17,42 @@ So, let's get right at it...!!!
 
 ## Step 1: Deploy the LLM Server App
 
+### Create the server as K8s Deployment
+
+First, let's deploy our LLM Server App as a K8s deployment object.
+
 ```bash
-kubectl -n ysb-llm-app port-forward --address=0.0.0.0 service/ysb-llm-server 8080:80
+kubectl apply -f https://github.com/yogeshbendre/k8s_apps/blob/main/simple_llm_app/ysb-llm-server.yaml
 ```
+
+This deployment uses tinyllama LLM model which doesn't require any GPU for performing inferences.
+Please note, the download of container image may take a while due to its size for the first time.
+
+### Verify the server pods are running
+
+```bash
+kubectl get pods
+```
+
+You should see the pod with name of the format "ysb-llm-sever-XXXX" in the running status.
+
+Check the logs of the running pod with the following command.
+You should see that server is listening.
+(Replace ysb-llm-server-XXX with the actual name of the pod you saw in the earlier command.)
+
+```bash
+kubectl logs ysb-llm-server-XXX
+```
+
+
+### (OPTIONAL) Verify the server is running inside the pod
+
 
 
 ## Step 2: Expose the LLM Server App via a Load Balancer Service
 
 ```bash
-kubectl -n ysb-llm-app port-forward --address=0.0.0.0 service/ysb-llm-server 8080:80
+kubectl apply -f https://github.com/yogeshbendre/k8s_apps/blob/main/simple_llm_app/ysb-llm-service.yaml
 ```
 
 
