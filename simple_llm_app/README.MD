@@ -36,6 +36,8 @@ kubectl get pods
 
 You should see the pod with name of the format "ysb-llm-sever-XXXX" in the running status.
 
+### (OPTIONAL) Verify the server is running inside the pod
+
 Check the logs of the running pod with the following command.
 You should see that server is listening.
 (Replace ysb-llm-server-XXX with the actual name of the pod you saw in the earlier command.)
@@ -45,7 +47,6 @@ kubectl logs ysb-llm-server-XXX
 ```
 
 
-### (OPTIONAL) Verify the server is running inside the pod
 
 
 
