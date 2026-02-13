@@ -21,7 +21,7 @@ spec:
             pullPolicy: IfNotPresent
       containers:
         - name: inference
-          command:
+          command: ["/bin/sh","-c"]
           args:
             - |
               echo "Running GGUF Server By YSB"
@@ -41,5 +41,4 @@ spec:
             limits:
               cpu: "2"
               memory: "2Gi"
-
-
+              
