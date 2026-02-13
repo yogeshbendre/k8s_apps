@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ysb-llm-server
+  labels:
+    app: ysb-llm-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ysb-llm-server
+  template:
+    metadata:
+      labels:
+        app: ysb-llm-server
+    spec:
+      volumes:
+        - name: model-volume
+          image:
+            reference: ghcr.io/yogeshbendre/ysbtlm:2.0
+            pullPolicy: IfNotPresent
+      containers:
+        - name: inference
+          command:
+          args:
+            - |
+              echo "Running GGUF Server By YSB"
+              /app/llama-server \
+                -m /model1/models/tinyllama.gguf \
+                --host 0.0.0.0 \
+                --port 8001 \
+                -n 40
+          image: ghcr.io/yogeshbendre/yllamacpp:full
+          volumeMounts:
+            - name: model-volume
+              mountPath: /model1
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "1Gi"
+            limits:
+              cpu: "2"
+              memory: "2Gi"
+
+
