@@ -59,9 +59,13 @@ kubectl apply -f https://github.com/yogeshbendre/k8s_apps/blob/main/simple_llm_a
 
 ## Step 3: Enable k8s port-forwarding (For Testing Only)
 
+Now, we will enable the port forwarding on a machine where we are running the kubectl commands.
+This is only for testing purpose. Don't use this method for production.
+
 
 ```bash
-kubectl -n ysb-llm-app port-forward --address=0.0.0.0 service/ysb-llm-server 8080:80
+kubectl port-forward --address=0.0.0.0 service/ysb-llm-service 8080:80
 ```
+Now. you can open the browser from this machine and access the LLM Server via UI.
+http://localhost:8080/
 
-Next, we run more.
