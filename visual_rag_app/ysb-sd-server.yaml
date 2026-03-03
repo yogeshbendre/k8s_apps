@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ysb-sd-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ysb-sd-server
+  template:
+    metadata:
+      labels:
+        app: ysb-sd-server
+    spec:
+      containers:
+      - name: ysb-sd-server
+        image: ghcr.io/yogeshbendre/ysb-sd-cpp:3.0
+        imagePullPolicy: Always
+        command: ["/ysb-sd-server"]
+        args:
+        - "--model"
+        - "/model2/sd-model/sd-v1-4.gguf"
+        - "--listen-ip"
+        - "0.0.0.0"
+        - "--listen-port"
+        - "8080"
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            memory: "4Gi"
+          limits:
+            memory: "6Gi"
+        volumeMounts:
+        - mountPath: /model2
+          name: model-volume2
+      volumes:
+      - image:
+          pullPolicy: IfNotPresent
+          reference: ghcr.io/yogeshbendre/ysb-sd-v1-4:2.0
+        name: model-volume2
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ysb-sd-service
+spec:
+  selector:
+    app: ysb-sd-server
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+  type: LoadBalancer
