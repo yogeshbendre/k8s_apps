@@ -2,17 +2,17 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: ysb-llm-server
-  name: ysb-llm-server
+    app: ysb-llava-server
+  name: ysb-llava-server
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ysb-llm-server
+      app: ysb-llava-server
   template:
     metadata:
       labels:
-        app: ysb-llm-server
+        app: ysb-llava-server
     spec:
       containers:
       - args:
