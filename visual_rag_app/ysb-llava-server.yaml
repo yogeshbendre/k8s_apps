@@ -40,3 +40,16 @@ spec:
           pullPolicy: IfNotPresent
           reference: ghcr.io/yogeshbendre/ysb-llava-mini:1.0
         name: model-volume
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ysb-llava-service
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8001
+  selector:
+    app: ysb-llava-server
+  type: LoadBalancer
