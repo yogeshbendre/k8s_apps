@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ysb-visual-rag-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ysb-visual-rag-api
+  template:
+    metadata:
+      labels:
+        app: ysb-visual-rag-api
+    spec:
+      containers:
+      - name: ysb-visual-rag-api
+        image: ghcr.io/yogeshbendre/ysb-vis-rag-api:4.0
+        ports:
+        - containerPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ysb-visual-rag-service
+spec:
+  selector:
+    app: ysb-visual-rag-api
+  ports:
+  - port: 80
+    targetPort: 8000
