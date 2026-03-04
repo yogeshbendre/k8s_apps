@@ -16,7 +16,7 @@ spec:
       - name: ysb-sd-server
         image: ghcr.io/yogeshbendre/ysb-sd-cpp:3.0
         imagePullPolicy: Always
-        command: ["/ysb-sd-server"]
+        command: ["/sd-server"]
         args:
         - "--model"
         - "/model2/sd-model/sd-v1-4.gguf"
