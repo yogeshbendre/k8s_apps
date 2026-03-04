@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: ysb-visual-rag-api
-        image: ghcr.io/yogeshbendre/ysb-vis-rag-api:4.0
+        image: ghcr.io/yogeshbendre/ysb-vis-rag-api:5.0
         ports:
         - containerPort: 8000
 ---
