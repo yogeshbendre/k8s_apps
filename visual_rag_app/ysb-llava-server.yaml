@@ -18,7 +18,7 @@ spec:
       - args:
         - |
           echo "Running GGUF Server By YSB"
-          /app/llama-server --model /model2/llava-models/llava-phi-3-mini-f16.gguf --mmproj /models/llava-models/llava-phi-3-mini-mmproj-f16.gguf  --port 8001 --host 0.0.0.0  -n 40
+          /app/llama-server --model /models/llava-models/llava-phi-3-mini-f16.gguf --mmproj /models/llava-models/llava-phi-3-mini-mmproj-f16.gguf  --port 8001 --host 0.0.0.0  -n 40
         command:
         - /bin/sh
         - -c
