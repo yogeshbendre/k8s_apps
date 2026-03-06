@@ -42,38 +42,5 @@ Please note, the download of container image may take a while due to its size fo
 kubectl get pods
 ```
 
-You should see the pod with name of the format "ysb-llm-sever-XXXX" in the running status.
 
-### (OPTIONAL) Verify the server is running inside the pod
-
-Check the logs of the running pod with the following command.
-You should see that server is listening.
-(Replace ysb-llm-server-XXX with the actual name of the pod you saw in the earlier command.)
-
-```bash
-kubectl logs ysb-llm-server-XXX
-```
-
-
-
-
-
-## Step 2: Expose the LLM Server App via a Load Balancer Service
-
-```bash
-kubectl apply -f https://github.com/yogeshbendre/k8s_apps/blob/main/simple_llm_app/ysb-llm-service.yaml
-```
-
-
-## Step 3: Enable k8s port-forwarding (For Testing Only)
-
-Now, we will enable the port forwarding on a machine where we are running the kubectl commands.
-This is only for testing purpose. Don't use this method for production.
-
-
-```bash
-kubectl port-forward --address=0.0.0.0 service/ysb-llm-service 8080:80
-```
-Now. you can open the browser from this machine and access the LLM Server via UI.
-http://localhost:8080/
 
